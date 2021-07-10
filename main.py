@@ -1,26 +1,22 @@
-from menu import Menu
-from coffee_maker import CoffeeMaker
-from money_machine import MoneyMachine
+# import smtplib
 
-money_machine = MoneyMachine()
+# my_email = "erhardbr@gmail.com"
+# password = "python1429$$"
 
-# create coffee-maker object
-coffee_maker = CoffeeMaker()
-menu = Menu()
+# with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+#     connection.starttls()
+#     connection.login(user=my_email, password=password)
+#     connection.sendmail(from_addr=my_email, to_addrs=my_email,
+#                         msg="Subject:Hello\n\nThis is the body of my email")
 
-is_on = True
+import datetime as dt
 
-while is_on:
-    options = menu.get_items()
-    choice = input(f"What would you like? ({options}): ")
-    if choice == 'off':
-        is_on = False
-    elif choice == "report":
-        coffee_maker.report()
-        money_machine.report()
-    else:
-        drink = menu.find_drink(choice)
-        is_enough_ingredients = coffee_maker.is_resource_sufficient(drink)
-        is_payment_successful = money_machine.make_payment(drink.cost)
-        if is_enough_ingredients and is_payment_successful:
-            coffee_maker.make_coffee(drink)
+# get current data and time
+now = dt.datetime.now()
+year = now.year
+month = now.month
+day_of_week = now.weekday()
+
+
+date_of_birth = dt.datetime(year=1987, month=10, day=26, hour=7, minute=15)
+print(date_of_birth)
