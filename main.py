@@ -1,19 +1,20 @@
-from question_model import Question
-from data import question_data
-from quiz_brain import QuizBrain
+from turtle import Turtle, Screen
 
-# create empty list
-question_bank = []
-for question in question_data:
-    question_text = question["text"]
-    question_answer = question['answer']
-    new_question = Question(question_text, question_answer)
-    question_bank.append(new_question)
+timmy_the_turtle = Turtle()
+timmy_the_turtle.shape("turtle")
+timmy_the_turtle.color('DarkGreen')
+timmy_the_turtle.forward(100)
+timmy_the_turtle.right(90)
+timmy_the_turtle.forward(100)
+timmy_the_turtle.right(90)
+timmy_the_turtle.forward(100)
+timmy_the_turtle.right(90)
+timmy_the_turtle.forward(100)
 
-quiz = QuizBrain(question_bank)
+for _ in range(4):
+    timmy_the_turtle.forward(100)
+    timmy_the_turtle.right(90)
 
-while quiz.still_has_questions():
-    quiz.next_question()
 
-print("You've completed the quiz.")
-print(f"Your final score was: {quiz.score}/{quiz.question_number}")
+screen = Screen()
+screen.exitonclick()
