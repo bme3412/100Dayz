@@ -1,22 +1,19 @@
-# import smtplib
+from question_model import Question
+from data import question_data
+from quiz_brain import QuizBrain
 
-# my_email = "erhardbr@gmail.com"
-# password = "python1429$$"
+# create empty list
+question_bank = []
+for question in question_data:
+    question_text = question["text"]
+    question_answer = question['answer']
+    new_question = Question(question_text, question_answer)
+    question_bank.append(new_question)
 
-# with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
-#     connection.starttls()
-#     connection.login(user=my_email, password=password)
-#     connection.sendmail(from_addr=my_email, to_addrs=my_email,
-#                         msg="Subject:Hello\n\nThis is the body of my email")
+quiz = QuizBrain(question_bank)
 
-import datetime as dt
+while quiz.still_has_questions():
+    quiz.next_question()
 
-# get current data and time
-now = dt.datetime.now()
-year = now.year
-month = now.month
-day_of_week = now.weekday()
-
-
-date_of_birth = dt.datetime(year=1987, month=10, day=26, hour=7, minute=15)
-print(date_of_birth)
+print("You've completed the quiz.")
+print(f"Your final score was: {quiz.score}/{quiz.question_number}")
