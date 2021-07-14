@@ -1,38 +1,48 @@
-from turtle import Turtle, Screen
-import random
+from turtle import Screen
+from snake import Snake
+from food import Food
+import time
 
-is_race_on = False
-tim = Turtle()
 screen = Screen()
-screen.setup(width=500, height=400)
-user_bet = screen.textinput(
-    title="Make your bet", prompt='Which turtle will win the race? Enter a color: ')
-colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
-y_positions = [-70, -40, -10, 20, 50, 80]
-all_turtles = []
+screen.setup(width=600, height=600)
+screen.bgcolor('black')
+screen.title('My Snake Game')
+screen.tracer(0)
 
-for turtle_index in range(0, 6):
-    new_turtle = Turtle(shape="turtle")
-    new_turtle.penup()
-    new_turtle.color(colors[turtle_index])
-    new_turtle.goto(x=-230, y=y_positions[turtle_index])
-    all_turtles.append(new_turtle)
+snake = Snake()
+food = Food()
 
-if user_bet:
-    is_race_on = True
+screen.listen()
+screen.onkey(snake.up, "Up")
+screen.onkey(snake.down, "Down")
+screen.onkey(snake.left, "Left")
+screen.onkey(snake.right, "Right")
 
-while is_race_on:
-    for turtle in all_turtles:
-        if turtle.xcor() > 230:
-            is_race_on = False
-            winning_color = turtle.pencolor()
-            if winning_color == user_bet:
-                print(
-                    f"You've won! The {winning_color} turtle is the winner!")
-            else:
-                print(
-                    f"You've lost. The {winning_color} turtle is the winner")
-        rand_disance = random.randint(0, 10)
-        turtle.forward(rand_disance)
+
+# create turtles
+# segment_1 = Turtle(shape='square')
+# segment_1.color("white")
+
+# segment_2 = Turtle(shape='square')
+# segment_2.color("white")
+# segment_2.goto(-20, 0)
+
+# segment_3 = Turtle(shape='square')
+# segment_3.color("white")
+# segment_3.goto(-40, 0)
+
+# create turtles using a for loop and tuples
+
+
+game_is_on = True
+while game_is_on:
+    screen.update()
+    time.sleep(0.1)
+
+    snake.move()
+
+    # Detect collision with food.
+    if snake.head.distance(food) < 15:
+        food.refresh()
 
 screen.exitonclick()
