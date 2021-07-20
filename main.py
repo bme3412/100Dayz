@@ -1,35 +1,68 @@
 from tkinter import *
+from tkinter import messagebox
+
+# ----------- PASSWORD GENERATOR ---------------- #
 
 
-# ---------------------------- CONSTANTS ------------------------------- #
-PINK = "#e2979c"
-RED = "#e7305b"
-GREEN = "#9bdeac"
-YELLOW = "#f7f5dd"
-FONT_NAME = "Courier"
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
-LONG_BREAK_MIN = 20
+# -------------SAVE PASSWORD -------------------- #
 
-# ---------------------------- TIMER RESET ------------------------------- #
+def save():
 
-# ---------------------------- TIMER MECHANISM ------------------------------- #
+    website = website_entry.get()
+    email = email_entry.get()
+    password = password_entry.get()
 
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
+    if len(website) == 0 or len(password) == 0:
+        messagebox.showinfo(title='My bad, fam',
+                            message="Please make sure no fields are empty")
+    else:
 
-# ---------------------------- UI SETUP ------------------------------- #
+        # messagebox.showinfo(title="Title", message="Message")
+        is_ok = messagebox.askokcancel(
+            title=website, message=f"These are the details entered: \nEmail: {email} \nPassword: {password} \nIs it ok to save?")
+
+        if is_ok:
+            with open("Day 29/data.txt", "a") as data_file:
+                data_file.write(f"{website} | {email} | {password}\n")
+                website_entry.delete(0, END)
+                password_entry.delete(0, END)
+
+
+# ---------------- UI SETUP ----------------------- #
+
+
 window = Tk()
-window.title('Money Never Sleeps')
-window.config(padx=100, pady=50)
+window.title("Password Manager")
+window.config(padx=50, pady=50)
 
-# use canvas and add image
-canvas = Canvas(width=526, height=316)
-file_path = "stocks.png"
-image = PhotoImage(file=file_path)
+canvas = Canvas(height=200, width=200)
+# logo_img = PhotoImage(
+# file="/Users/BrendanErhard/Desktop/Data Science/Udemy/100 days of python/Day 29/KG.png")
+# canvas.create_image(100, 100, image=logo_img)
+canvas.grid(row=8, column=1)
 
+# Labels
+website_label = Label(text="Website:")
+website_label.grid(row=1, column=0)
+email_label = Label(text="Email/Username:")
+email_label.grid(row=2, column=0)
+password_label = Label(text="password:")
+password_label.grid(row=3, column=0)
 
-canvas.create_image(258, 158, image=image)
-canvas.pack()
+# Entries
+website_entry = Entry(width=35)
+website_entry.grid(row=1, column=1, columnspan=2)
+website_entry.focus()
+email_entry = Entry(width=35)
+email_entry.grid(row=2, column=1, columnspan=2)
+email_entry.insert(0, 'erhardbr@gmail.com')
+password_entry = Entry(width=21)
+password_entry.grid(row=3, column=1)
 
+# Buttons
+generate_password_button = Button(text="Generate Password")
+generate_password_button.grid(row=3, column=2)
+add_button = Button(text="add", width=36, command=save)
+add_button.grid(row=4, column=1, columnspan=2)
 
 window.mainloop()
