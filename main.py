@@ -1,34 +1,35 @@
 from tkinter import *
 
 
-def button_clicked():
-    print("I got clicked")
-    new_text = input.get()
-    my_label.config(text=new_text)
+# ---------------------------- CONSTANTS ------------------------------- #
+PINK = "#e2979c"
+RED = "#e7305b"
+GREEN = "#9bdeac"
+YELLOW = "#f7f5dd"
+FONT_NAME = "Courier"
+WORK_MIN = 25
+SHORT_BREAK_MIN = 5
+LONG_BREAK_MIN = 20
 
+# ---------------------------- TIMER RESET ------------------------------- #
 
+# ---------------------------- TIMER MECHANISM ------------------------------- #
+
+# ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
+
+# ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
-window.title("My First GUI Program")
-window.minsize(width=500, height=300)
-window.config(padx=100, pady=200)
+window.title('Money Never Sleeps')
+window.config(padx=100, pady=50)
 
-# Label
-my_label = Label(text="I Am a Label", font=("Arial", 24, "bold"))
-my_label.config(text="New Text")
-my_label.grid(column=0, row=0)
-my_label.config(padx=50, pady=50)
+# use canvas and add image
+canvas = Canvas(width=526, height=316)
+file_path = "stocks.png"
+image = PhotoImage(file=file_path)
 
-# Button
-button = Button(text="Click Me", command=button_clicked)
-button.grid(column=1, row=1)
 
-new_button = Button(text="New Button")
-new_button.grid(column=2, row=0)
-
-# Entry
-input = Entry(width=10)
-print(input.get())
-input.grid(column=3, row=2)
+canvas.create_image(258, 158, image=image)
+canvas.pack()
 
 
 window.mainloop()
