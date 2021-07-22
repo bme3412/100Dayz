@@ -1,16 +1,16 @@
+from tkinter import *
 
-try:
-    file = open("a_file.txt")
-    a_dictionary = {"key": "value"}
-    print(a_dictionary["key"])
-except FileNotFoundError:
-    file = open("Day 30/a.file.txt", "w")
-    file.write("Something final")
-except KeyError as error_message:
-    print(f"That key {error_message} does not exist")
-else:
-    content = file.read()
-    print(content)
-finally:
-    file.close()
-    print("File was closed")
+BACKGROUND_COLOR = "#B1DDC6"
+
+window = Tk()
+window.title("Flashy")
+window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
+
+canvas = Canvas(width=800, height=526)
+card_front_img = PhotoImage(
+    file="/Users/BrendanErhard/Desktop/Data Science/Udemy/100 days of python/Day 31/images/card_front.png")
+canvas.create_image(400, 263, image=card_front_img)
+canvas.grid(row=0, column=0)
+canvas.config(bg=BACKGROUND_COLOR)
+
+window.mainloop()
