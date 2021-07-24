@@ -1,16 +1,22 @@
-from tkinter import *
+# import smtplib
 
-BACKGROUND_COLOR = "#B1DDC6"
+# my_email = "erhardbr@gmail.com"
+# password = "python1429$$"
 
-window = Tk()
-window.title("Flashy")
-window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
+# with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+#     connection.starttls()
+#     connection.login(user=my_email, password=password)
+#     connection.sendmail(from_addr=my_email, to_addrs=my_email,
+#                         msg="Subject:Hello\n\nThis is the body of my email")
 
-canvas = Canvas(width=800, height=526)
-card_front_img = PhotoImage(
-    file="/Users/BrendanErhard/Desktop/Data Science/Udemy/100 days of python/Day 31/images/card_front.png")
-canvas.create_image(400, 263, image=card_front_img)
-canvas.grid(row=0, column=0)
-canvas.config(bg=BACKGROUND_COLOR)
+import datetime as dt
 
-window.mainloop()
+# get current data and time
+now = dt.datetime.now()
+year = now.year
+month = now.month
+day_of_week = now.weekday()
+
+
+date_of_birth = dt.datetime(year=1987, month=10, day=26, hour=7, minute=15)
+print(date_of_birth)
